@@ -5,7 +5,7 @@ export default function Product({ name }) {
         <a href="#">
           <img
             className="rounded-t-lg"
-            src="/docs/images/blog/image-1.jpg"
+            src="/assets/images/card-background.jpg"
             alt=""
           />
         </a>

@@ -16,11 +16,7 @@ export const links: Route.LinksFunction = () => [
     rel: "preconnect",
     href: "https://fonts.gstatic.com",
     crossOrigin: "anonymous",
-  },
-  {
-    rel: "stylesheet",
-    href: "test",
-  },
+  }
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
