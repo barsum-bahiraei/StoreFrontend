@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import Product from "~/routes/home/components/product";
 import type { Route } from "./+types";
+import ProductContext from "./context/product-context";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -27,7 +28,7 @@ export default function Home() {
     }
   }, []);
   return (
-    <>
+    <ProductContext.Provider value={{ products }}>
       <input type="text" className="border rounded p-1" ref={inputRef} />
       <button
         onClick={() => (inputRef.current.value = "amin")}
@@ -36,15 +37,8 @@ export default function Home() {
         fucus input
       </button>
       <div className="flex flex-wrap gap-2 justify-center">
-        {products?.map((product) => {
-          return (
-            <Product
-              key={product.name + "-" + product.id}
-              name={product?.name}
-            />
-          );
-        })}
+        <Product />
       </div>
-    </>
+    </ProductContext.Provider>
   );
 }
