@@ -8,5 +8,21 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function Home() {
-  return <div>this is Home</div>;
+  return (
+    <div>
+      <header className="container grid grid-cols-min grid-flow-col mx-auto">
+        <div className="col-auto">
+          <a href="">Logo</a>
+          <a href="">Link 1</a>
+          <a href="">Link 2</a>
+          <a href="">Link 3</a>
+          <a href="">Link 4</a>
+        </div>
+        <div className="col-auto">
+          <button>Login</button>
+          <button>Create Account</button>
+        </div>
+      </header>
+    </div>
+  );
 }
