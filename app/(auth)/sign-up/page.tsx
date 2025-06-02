@@ -3,6 +3,7 @@
 import {ChangeEvent, useState} from "react";
 import Image from "next/image";
 import {UserCreateDto} from "@/app/(auth)/sign-in/models/user-create-dto";
+import {userService} from "@/app/(auth)/sign-in/services/user-service";
 
 export default function SignUp() {
     const [params, setParams] = useState<UserCreateDto>({
@@ -18,9 +19,10 @@ export default function SignUp() {
             [name]: value,
         }));
     };
-    const handleSubmit = () => {
-        console.log("Submitted JSON:", JSON.stringify(params));
-    };
+
+    async function userCreate() {
+        await userService.create(params);
+    }
 
     return (
         <div className="container mx-auto px-4">
@@ -96,7 +98,7 @@ export default function SignUp() {
                         </div>
                         <button
                             type="button"
-                            onClick={handleSubmit}
+                            onClick={userCreate}
                             className="w-full py-2 px-4 bg-blue-600 text-white font-medium rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                         >
                             Submit
