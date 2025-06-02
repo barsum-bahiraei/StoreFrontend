@@ -10,10 +10,20 @@ function makeInstance(baseURL: string): AxiosInstance {
         headers: {
             "Content-Type": "application/json",
         },
+        withCredentials: true,
         timeout: 10000,
     };
 
     const instance = axios.create(config);
+
+    // ====== اضافه کردن هدرهای پیش‌فرض ======
+    // X-Requested-With
+    // if (typeof window !== "undefined") {
+    //     // این کد فقط زمانی اجرا می‌شود که در مرورگر باشیم
+    //     instance.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
+    //     instance.defaults.headers.common["Client-Path"] = window.location.href;
+    // }
+    // ========================================
 
     // ====== اینترسپتور درخواست (برای همهٔ اینسنس‌ها می‌توان یکی ساخت) ======
     instance.interceptors.request.use(

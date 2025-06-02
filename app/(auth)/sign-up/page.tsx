@@ -2,8 +2,8 @@
 
 import {ChangeEvent, useState} from "react";
 import Image from "next/image";
-import {UserCreateDto} from "@/app/(auth)/sign-in/models/user-create-dto";
-import {userService} from "@/app/(auth)/sign-in/services/user-service";
+import {UserCreateDto} from "@/app/(auth)/sign-up/models/user-create-dto";
+import {userService} from "@/app/(auth)/sign-up/services/user-service";
 
 export default function SignUp() {
     const [params, setParams] = useState<UserCreateDto>({
