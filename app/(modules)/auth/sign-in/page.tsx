@@ -2,16 +2,18 @@
 
 import {ChangeEvent, useState} from "react";
 import Image from "next/image";
-import {UserCreateDto} from "@/app/(auth)/sign-up/models/user-create-dto";
-import {userService} from "@/app/(auth)/sign-up/services/user-service";
+import {
+    SignInDto,
+    SignInViewModel,
+} from "@/app/(modules)/auth/models/sign-in-models";
+import {authService} from "@/app/(modules)/auth/services/auth-service";
 
-export default function SignUp() {
-    const [params, setParams] = useState<UserCreateDto>({
-        name: "",
-        family: "",
+export default function SignIn() {
+    const [params, setParams] = useState<SignInDto>({
         email: "",
         password: "",
     });
+
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         const {name, value} = e.target;
         setParams((prev) => ({
@@ -20,8 +22,10 @@ export default function SignUp() {
         }));
     };
 
-    async function userCreate() {
-        await userService.create(params);
+    async function signIn() {
+        const {data}: { data: SignInViewModel } = await authService.signIn(params);
+        window.localStorage.setItem("token", data.token);
+        // You can redirect or show a message here
     }
 
     return (
@@ -29,41 +33,9 @@ export default function SignUp() {
             <div className="flex flex-col md:flex-row items-center justify-center min-h-screen">
                 <div className="w-full md:w-1/3 p-4 bg-white border border-gray-300 rounded-lg shadow-md">
                     <h1 className="text-2xl font-bold text-center text-gray-800 mb-4">
-                        Sign Up
+                        Sign In
                     </h1>
                     <div className="space-y-3">
-                        <div>
-                            <label
-                                htmlFor="name"
-                                className="block text-sm font-medium text-gray-700"
-                            >
-                                Name
-                            </label>
-                            <input
-                                type="text"
-                                id="name"
-                                name="name"
-                                value={params.name}
-                                onChange={handleChange}
-                                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                            />
-                        </div>
-                        <div>
-                            <label
-                                htmlFor="family"
-                                className="block text-sm font-medium text-gray-700"
-                            >
-                                Family
-                            </label>
-                            <input
-                                type="text"
-                                id="family"
-                                name="family"
-                                value={params.family}
-                                onChange={handleChange}
-                                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                            />
-                        </div>
                         <div>
                             <label
                                 htmlFor="email"
@@ -97,8 +69,8 @@ export default function SignUp() {
                             />
                         </div>
                         <button
-                            type="button"
-                            onClick={userCreate}
+                            onClick={signIn}
+                            type="submit"
                             className="w-full py-2 px-4 bg-blue-600 text-white font-medium rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                         >
                             Submit
@@ -108,7 +80,7 @@ export default function SignUp() {
                 <div className="w-full md:w-2/3 flex items-center justify-center p-6">
                     <div className="w-full h-64 md:h-96 rounded-lg flex items-center justify-center">
                         <Image
-                            src="/images/sign-up.jpg"
+                            src="/images/sign-in.jpg"
                             alt=""
                             width={800}
                             height={800}
