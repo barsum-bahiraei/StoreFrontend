@@ -3,8 +3,8 @@
 import {ChangeEvent, useState} from "react";
 import Image from "next/image";
 import {ResponseModel} from "@/app/models/response";
-import {UserModels, UserCreateViewModel} from "@/app/(modules)/auth/models/user-models";
-import {userService} from "@/app/(modules)/auth/services/user-service";
+import {authService} from "@/app/(modules)/auth/services/auth-service";
+import {UserCreateViewModel, UserModels} from "@/app/(modules)/auth/models/sign-in-models";
 
 export default function SignUp() {
     const [params, setParams] = useState<UserModels>({
@@ -22,7 +22,7 @@ export default function SignUp() {
     };
 
     async function userCreate() {
-        const {data}: ResponseModel<UserCreateViewModel> = await userService.create(params);
+        const {data}: ResponseModel<UserCreateViewModel> = await authService.create(params);
         window.localStorage.setItem("token", data.token);
     }
 
