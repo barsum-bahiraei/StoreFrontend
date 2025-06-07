@@ -5,10 +5,6 @@ export class LoginParameters {
 
 export class LoginViewModel {
     token: string;
-    name: string;
-    family: string;
-    email: string;
-    // Add other fields if your API returns more
 }
 
 export class RegisterParameters {

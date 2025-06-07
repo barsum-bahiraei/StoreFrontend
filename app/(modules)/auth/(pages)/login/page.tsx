@@ -4,8 +4,10 @@ import {ChangeEvent, useState} from "react";
 import Image from "next/image";
 import {LoginParameters, LoginViewModel} from "@/app/(modules)/auth/models/auth-models";
 import {authService} from "@/app/(modules)/auth/services/auth-service";
+import {useRouter} from "next/navigation";
 
 export default function Login() {
+    const router = useRouter();
     const [params, setParams] = useState<LoginParameters>({
         email: "",
         password: "",
@@ -22,7 +24,7 @@ export default function Login() {
     async function login() {
         const {data}: { data: LoginViewModel } = await authService.login(params);
         window.localStorage.setItem("token", data.token);
-        // You can redirect or show a message here
+        router.push("/");
     }
 
     return (

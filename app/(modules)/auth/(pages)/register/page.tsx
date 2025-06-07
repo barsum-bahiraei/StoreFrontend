@@ -24,6 +24,7 @@ export default function Register() {
     async function register() {
         const {data}: ResponseModel<RegisterViewModel> = await authService.register(params);
         window.localStorage.setItem("token", data.token);
+
     }
 
     return (
