@@ -2,14 +2,11 @@
 
 import {ChangeEvent, useState} from "react";
 import Image from "next/image";
-import {
-    SignInDto,
-    SignInViewModel,
-} from "@/app/(modules)/auth/models/sign-in-models";
+import {LoginParameters, LoginViewModel} from "@/app/(modules)/auth/models/auth-models";
 import {authService} from "@/app/(modules)/auth/services/auth-service";
 
-export default function SignIn() {
-    const [params, setParams] = useState<SignInDto>({
+export default function Login() {
+    const [params, setParams] = useState<LoginParameters>({
         email: "",
         password: "",
     });
@@ -22,8 +19,8 @@ export default function SignIn() {
         }));
     };
 
-    async function signIn() {
-        const {data}: { data: SignInViewModel } = await authService.signIn(params);
+    async function login() {
+        const {data}: { data: LoginViewModel } = await authService.login(params);
         window.localStorage.setItem("token", data.token);
         // You can redirect or show a message here
     }
@@ -69,7 +66,7 @@ export default function SignIn() {
                             />
                         </div>
                         <button
-                            onClick={signIn}
+                            onClick={login}
                             type="submit"
                             className="w-full py-2 px-4 bg-blue-600 text-white font-medium rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                         >

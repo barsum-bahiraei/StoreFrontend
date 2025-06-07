@@ -4,10 +4,10 @@ import {ChangeEvent, useState} from "react";
 import Image from "next/image";
 import {ResponseModel} from "@/app/models/response";
 import {authService} from "@/app/(modules)/auth/services/auth-service";
-import {UserCreateViewModel, UserModels} from "@/app/(modules)/auth/models/sign-in-models";
+import {RegisterViewModel, RegisterParameters} from "@/app/(modules)/auth/models/auth-models";
 
-export default function SignUp() {
-    const [params, setParams] = useState<UserModels>({
+export default function Register() {
+    const [params, setParams] = useState<RegisterParameters>({
         name: "",
         family: "",
         email: "",
@@ -21,8 +21,8 @@ export default function SignUp() {
         }));
     };
 
-    async function userCreate() {
-        const {data}: ResponseModel<UserCreateViewModel> = await authService.create(params);
+    async function register() {
+        const {data}: ResponseModel<RegisterViewModel> = await authService.register(params);
         window.localStorage.setItem("token", data.token);
     }
 
@@ -100,7 +100,7 @@ export default function SignUp() {
                         </div>
                         <button
                             type="button"
-                            onClick={userCreate}
+                            onClick={register}
                             className="w-full py-2 px-4 bg-blue-600 text-white font-medium rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                         >
                             Submit

@@ -1,20 +1,19 @@
 import { storeAxios } from "@/app/plugins/http-client";
 import { ResponseModel } from "@/app/models/response";
-import {SignInDto, SignInViewModel, UserCreateViewModel, UserModels} from "@/app/(modules)/auth/models/sign-in-models";
+import {LoginParameters, LoginViewModel, RegisterViewModel, RegisterParameters} from "@/app/(modules)/auth/models/auth-models";
 
 export class AuthService {
     private api = storeAxios;
 
-    public async signIn(params: SignInDto): Promise<ResponseModel<SignInViewModel>> {
-        const response = await this.api.post<ResponseModel<SignInViewModel>>("Auth/SignIn", params);
+    public async login(params: LoginParameters): Promise<ResponseModel<LoginViewModel>> {
+        const response = await this.api.post<ResponseModel<LoginViewModel>>("Auth/Login", params);
         return response.data;
     }
 
-    public async create(params: UserModels): Promise<ResponseModel<UserCreateViewModel>> {
-        const response = await this.api.post<ResponseModel<UserCreateViewModel>>("User/Create", params);
+    public async register(params: RegisterParameters): Promise<ResponseModel<RegisterViewModel>> {
+        const response = await this.api.post<ResponseModel<RegisterViewModel>>("Auth/Register", params);
         return response.data;
     }
 }
 
 export const authService = new AuthService();
-

@@ -1,24 +1,27 @@
-export class SignInDto {
+export class LoginParameters {
     email: string;
     password: string;
 }
 
-export class SignInViewModel {
+export class LoginViewModel {
     token: string;
+    name: string;
+    family: string;
+    email: string;
     // Add other fields if your API returns more
 }
 
-export class UserModels {
+export class RegisterParameters {
     name: string;
     family: string;
     email: string;
     password: string;
 }
 
-export class UserCreateViewModel {
-    id: number;
+export class RegisterViewModel {
     name: string;
     family: string;
     email: string;
     token: string;
 }
+
