@@ -79,7 +79,7 @@ export default function Login() {
                 <div className="w-full md:w-2/3 flex items-center justify-center p-6">
                     <div className="w-full h-64 md:h-96 rounded-lg flex items-center justify-center">
                         <Image
-                            src="/images/sign-in.jpg"
+                            src="/images/login.jpg"
                             alt=""
                             width={800}
                             height={800}
